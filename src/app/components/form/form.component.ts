@@ -43,8 +43,6 @@ export class FormComponent {
   currentStep = signal<Step>(this.steps.at(0) as Step);
   progress = 0;
 
-  ngOnInit() {}
-
   handleStepCompletion(index: number) {
     this.formStepsQueryList.get(index)!.step.done = true;
     const nextStep = this.steps.at(index + 1);
@@ -55,9 +53,9 @@ export class FormComponent {
   }
 
   calculateProgress() {
-    const completed = this.formStepsQueryList
-      .toArray()
-      .filter((formStep) => formStep.step.done).length;
+    const completed = this.formStepsQueryList.filter(
+      (formStep) => formStep.step.done
+    ).length;
     this.progress = completed / this.steps.length;
   }
 }
