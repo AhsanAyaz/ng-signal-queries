@@ -1,0 +1,25 @@
+<div class="mb-4 flex justify-center">
+  <div class="w-full rounded-full bg-gray-200 h-2">
+    <div
+      class="w-progress rounded-full h-full duration-300"
+      [ngClass]="{'bg-blue-500': progress < 100, 'bg-green-500': (progress * 100) === 100}"
+      [style.width]="(progress * 100) + '%'"
+    ></div>
+  </div>
+</div>
+<section class="flex flex-col gap-4">
+  @for (step of steps; track $index) {
+    <epic-form-step
+      [step]="step"
+      [index]="$index"
+      [isValid]="step === currentStep()"
+      (stepCompleted)="handleStepCompletion($event)"
+    >
+      @if ($last && step.done) {
+        Finished
+      } @else {
+        Next Step
+      }
+    </epic-form-step>
+  }
+</section>

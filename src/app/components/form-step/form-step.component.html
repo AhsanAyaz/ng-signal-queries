@@ -1,0 +1,12 @@
+<div class="p-4 rounded-lg bg-gray-100 shadow-md">
+  <h2 class="text-lg font-bold mb-2">{{ step.title }}</h2>
+  <p class="my-4">{{step.description}}</p>
+  <button
+    class="px-4 py-2 bg-blue-500 text-white rounded-md"
+    (click)="completeStep()"
+    [disabled]="!isValid"
+    [ngClass]="{'opacity-50': !isValid, 'hover:bg-blue-700': isValid && !step.done, 'bg-green-600': step.done}"
+  >
+    <ng-content></ng-content>
+  </button>
+</div>

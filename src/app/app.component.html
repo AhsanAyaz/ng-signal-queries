@@ -180,7 +180,8 @@
 <main class="main">
   <div class="content">
     <div class="left-side">
-      <svg
+      <a href="https://ng-cookbook.com" target="_blank" rel="noreferrer noopener">
+        <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 982 239"
         fill="none"
@@ -225,18 +226,18 @@
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
-      <h1>Hello, {{ title }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
+      </a>
+      <h1>{{ title }}</h1>
+
+      <h2 class="font-bold text-2xl mt-6 mb-2">Multi Step Form</h2>
+      <epic-form></epic-form>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
       <div class="pill-group">
         @for (item of [
           { title: 'Explore the Docs', link: 'https://angular.dev' },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
+          { title: 'Angular Cookbook 2nd Edition', link: 'https://ng-cookbook.com' },
         ]; track item.title) {
           <a
             class="pill"
@@ -261,7 +262,7 @@
       </div>
       <div class="social-links">
         <a
-          href="https://github.com/angular/angular"
+          href="https://github.com/ahsanayaz"
           aria-label="Github"
           target="_blank"
           rel="noopener"
@@ -280,7 +281,7 @@
           </svg>
         </a>
         <a
-          href="https://twitter.com/angular"
+          href="https://twitter.com/codewith_ahsan"
           aria-label="Twitter"
           target="_blank"
           rel="noopener"
@@ -299,7 +300,7 @@
           </svg>
         </a>
         <a
-          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"
+          href="https://www.youtube.com/codewithahsan"
           aria-label="Youtube"
           target="_blank"
           rel="noopener"
