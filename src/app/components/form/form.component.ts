@@ -1,7 +1,14 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, QueryList, ViewChildren, signal } from '@angular/core';
+import {
+  Component,
+  QueryList,
+  ViewChildren,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormStepComponent } from '../form-step/form-step.component';
 import { Step } from '../../interfaces/step.interface';
+import { StepDescriptionGeneratorService } from '../../services/step-description-generator.service';
 
 @Component({
   selector: 'epic-form',
@@ -11,33 +18,24 @@ import { Step } from '../../interfaces/step.interface';
   imports: [NgFor, FormStepComponent, NgClass],
 })
 export class FormComponent {
+  descriptionService = inject(StepDescriptionGeneratorService);
   steps: Step[] = [
-    { title: 'Step 1', done: false, description: this.generateRandomText() },
-    { title: 'Step 2', done: false, description: this.generateRandomText() },
-    { title: 'Step 3', done: false, description: this.generateRandomText() },
+    {
+      title: 'Step 1',
+      done: false,
+      description: this.descriptionService.generate(),
+    },
+    {
+      title: 'Step 2',
+      done: false,
+      description: this.descriptionService.generate(),
+    },
+    {
+      title: 'Step 3',
+      done: false,
+      description: this.descriptionService.generate(),
+    },
   ];
-
-  generateRandomText(): string {
-    // You can customize the text generation as needed
-    const adjectives = [
-      'Amazing',
-      'Incredible',
-      'Superb',
-      'Fantastic',
-      'Awesome',
-    ];
-    const nouns = [
-      'Adventure',
-      'Journey',
-      'Experience',
-      'Discovery',
-      'Exploration',
-    ];
-    const randomAdjective =
-      adjectives[Math.floor(Math.random() * adjectives.length)];
-    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
-    return `Unlock your ${randomAdjective} ${randomNoun}!`;
-  }
 
   @ViewChildren(FormStepComponent)
   formStepsQueryList!: QueryList<FormStepComponent>;
@@ -62,20 +60,4 @@ export class FormComponent {
       .filter((formStep) => formStep.step.done).length;
     this.progress = completed / this.steps.length;
   }
-
-  // handleValidationChange(isValid: boolean) {
-  //   // 2. Prevent moving to the next step if the current step is invalid
-  //   if (!isValid && this.currentStep() > 0) {
-  //     this.currentStep.update((val) => val - 1); // Go back to the previous step
-  //   }
-
-  //   // 3. Validate the entire form if all steps are completed
-  //   if (this.currentStep() === this.steps.length - 1) {
-  //     const allValid = this.formStepsQueryList
-  //       .toArray()
-  //       .every((step) => step.isValid);
-  //     console.log({ allValid });
-  //     // this.formValid.value = allValid; // Assuming you have a signal for overall form validity
-  //   }
-  // }
 }
