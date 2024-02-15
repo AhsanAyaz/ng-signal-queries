@@ -12,7 +12,7 @@ import { NgClass } from '@angular/common';
 export class FormStepComponent {
   @Input() step!: Step;
   @Input() index!: number;
-  @Input() isValid = false; // Implement your validation logic
+  @Input() isValid = false;
 
   @Output() stepCompleted = new EventEmitter<number>();
 
