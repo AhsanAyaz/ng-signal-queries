@@ -1,11 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import {
-  Component,
-  QueryList,
-  ViewChildren,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormStepComponent } from '../form-step/form-step.component';
 import { Step } from '../../interfaces/step.interface';
 import { StepDescriptionGeneratorService } from '../../services/step-description-generator.service';
@@ -40,14 +34,14 @@ export class FormComponent {
   @ViewChildren(FormStepComponent)
   formStepsQueryList!: QueryList<FormStepComponent>;
 
-  currentStep = signal<Step>(this.steps.at(0) as Step);
+  currentStepIndex = 0;
   progress = 0;
 
   handleStepCompletion(index: number) {
     this.formStepsQueryList.get(index)!.step.done = true;
-    const nextStep = this.steps.at(index + 1);
+    const nextStep = this.formStepsQueryList.get(index + 1);
     if (nextStep) {
-      this.currentStep.set(nextStep);
+      this.currentStepIndex++;
     }
     this.calculateProgress();
   }
@@ -56,6 +50,6 @@ export class FormComponent {
     const completed = this.formStepsQueryList.filter(
       (formStep) => formStep.step.done
     ).length;
-    this.progress = completed / this.steps.length;
+    this.progress = (completed / this.formStepsQueryList.length) * 100;
   }
 }
